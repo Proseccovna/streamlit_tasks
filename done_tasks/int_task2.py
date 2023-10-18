@@ -14,7 +14,7 @@ import plotly.graph_objects as go
 
 
 st.title('БД "Tips" в Streamlit')
-tips = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv", index_col = 0)
+tips = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
 st.header('Первые 10 строк таблицы "Tips"')
 st.write(tips.head(10))
 #График №1
