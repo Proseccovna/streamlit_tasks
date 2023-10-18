@@ -13,7 +13,7 @@ from plotly.tools import mpl_to_plotly
 
 st.title('БД "Tips" в Streamlit')
 
-tips = pd.read_csv('/home/tata/DS_bootcamp/ds-phase-0/learning/tasks/week-02/datasets/tips.csv', index_col = 0)
+tips = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv", index_col = 0)
 
 st.header('Первые 10 строк таблицы "Tips"')
 
