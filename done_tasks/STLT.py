@@ -33,12 +33,12 @@ if uploaded is not None:
     trunc_U = U[:, :top_k]
     trunc_sigma = sigma[:top_k, :top_k]
     trunc_V = V[:top_k, :]
-    trunc_image = trunc_U@trunc_sigma@trunc_V
-    trunc_image = (trunc_image - trunc_image.min()) / (trunc_image.max() - trunc_image.min())
+    image = trunc_U@trunc_sigma@trunc_V
+    image = (image - image.min()) / (image.max() - image.min())
     parameters = top_k
 else: 
     image = io.imread('https://upload.wikimedia.org/wikipedia/commons/9/9a/%D0%9D%D0%B5%D1%82_%D1%84%D0%BE%D1%82%D0%BE.png')
     plt.xticks([])
     plt.yticks([])
 
-st.image(trunc_image, caption='Ваша картинка', use_column_width=True)
+st.image(image, caption='Ваша картинка', use_column_width=True)
