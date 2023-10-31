@@ -8,7 +8,7 @@ import seaborn as sns
 import streamlit as st
 import plotly_express as px
 from plotly.tools import mpl_to_plotly
-from skimage import io
+from PIL import Image
 from sklearn.datasets import load_iris # pip install scikit-learn
 from sklearn.decomposition import TruncatedSVD, PCA
 from sklearn.preprocessing import StandardScaler
@@ -23,8 +23,8 @@ top_k = st.sidebar.slider('Выберите количество сингуля�
 uploaded = st.sidebar.file_uploader('Загрузить картинку', type = ['jpg'])
 
 if uploaded is not None:
-    
-    image = io.imread(uploaded)
+    image = Image.open(uploaded)
+    image = np.array(image)
     plt.xticks([])
     plt.yticks([])
     U, sing_values, V = np.linalg.svd(image)
@@ -37,7 +37,7 @@ if uploaded is not None:
     image = (image - image.min()) / (image.max() - trunc_image.min())
     parameters = top_k
 else: 
-    image = io.imread('https://upload.wikimedia.org/wikipedia/commons/9/9a/%D0%9D%D0%B5%D1%82_%D1%84%D0%BE%D1%82%D0%BE.png')
+    image = Image.open('https://upload.wikimedia.org/wikipedia/commons/9/9a/%D0%9D%D0%B5%D1%82_%D1%84%D0%BE%D1%82%D0%BE.png')
     plt.xticks([])
     plt.yticks([])
 
