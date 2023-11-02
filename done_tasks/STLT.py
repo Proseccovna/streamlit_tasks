@@ -3,6 +3,7 @@ import pandas as pd
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import cv2
 
 import streamlit as st
 import plotly_express as px
@@ -17,11 +18,13 @@ st.title('Изменение картинки в Streamlit')
 st.sidebar.header('Давайте изменим вашу картинку')
 top_k = st.sidebar.slider('Выберите количество сингулярных чисел', 0, 1000, 500)
 
-uploaded = st.sidebar.file_uploader('Загрузить картинку', type = ['jpg'])
+uploaded = st.sidebar.file_uploader('Загрузить картинку', type = ['jpg', 'jpeg', 'png'])
 
 if uploaded is not None:
     
-    image = io.imread(uploaded)
+    image = cv2.imdecode(np.fromstring(uploaded.read(), np.uint8), cv2.IMREAD_COLOR)
+    if len(image.shape) == 3:
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     plt.xticks([])
     plt.yticks([])
     U, sing_values, V = np.linalg.svd(image)
