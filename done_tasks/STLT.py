@@ -3,12 +3,13 @@ import pandas as pd
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import cv2
 
 import streamlit as st
 import plotly_express as px
 from plotly.tools import mpl_to_plotly
-from skimage import io
+import io
+from skimage import io as skio
+from skimage.color import rgb2gray
 
 
 
@@ -18,15 +19,17 @@ st.title('Изменение картинки в Streamlit')
 st.sidebar.header('Давайте изменим вашу картинку')
 top_k = st.sidebar.slider('Выберите количество сингулярных чисел', 0, 1000, 500)
 
-uploaded = st.sidebar.file_uploader('Загрузить картинку', type = ['jpg', 'jpeg', 'png'])
+uploaded = st.sidebar.file_uploader('Загрузить картинку', type = ['jpg'])
 
 if uploaded is not None:
     
-    image = cv2.imdecode(np.fromstring(uploaded.read(), np.uint8), cv2.IMREAD_COLOR)
-    if len(image.shape) == 3:
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = skio.imread(uploaded)
     plt.xticks([])
     plt.yticks([])
+
+    if image.ndim == 3:
+        image = rgb2gray(image)
+
     U, sing_values, V = np.linalg.svd(image)
     sigma = np.zeros(shape=image.shape)
     np.fill_diagonal(sigma, sing_values)
@@ -37,7 +40,7 @@ if uploaded is not None:
     image = (image - image.min()) / (image.max() - image.min())
     parameters = top_k
 else: 
-    image = io.imread('https://upload.wikimedia.org/wikipedia/commons/9/9a/%D0%9D%D0%B5%D1%82_%D1%84%D0%BE%D1%82%D0%BE.png')
+    image = skio.imread('https://upload.wikimedia.org/wikipedia/commons/9/9a/%D0%9D%D0%B5%D1%82_%D1%84%D0%BE%D1%82%D0%BE.png')
     plt.xticks([])
     plt.yticks([])
 
