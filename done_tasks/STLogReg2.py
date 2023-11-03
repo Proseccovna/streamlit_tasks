@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression 
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 st.title('Логистическая регрессия в Streamlit')
 st.sidebar.header('Загрузите файл .csv для обучающей выборки')
@@ -39,6 +40,12 @@ if st.sidebar.button('Выполнить логистическую регрес
     y_train = train_data[target_col]
     X_test = test_data[feature_cols] if test_data is not None else X_train
     y_test = test_data[target_col] if test_data is not None else y_train
+
+#Чтобы данные были нормик 
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.transform(X_test)
+
     model = LinearRegression()
     model.fit(X_train, y_train)
 
