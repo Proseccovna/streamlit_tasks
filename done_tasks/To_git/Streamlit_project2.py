@@ -136,7 +136,7 @@ elif page == "Модель обучения":
     st.header('Тест моделей:')
     # 1) Запустили Catboost регрессию с параметрами по умолчанию
     st.subheader("1. CatBoost регрессия (по умолчанию)")
-    st.text("Результат: {ваш результат здесь}")
+    st.text("Результат: 0.1356")
 
     # 2) Потюнили Catboost через гридсёрч, запустили - 0.1356
     st.subheader("2. Тюнинг CatBoost через GridSearchCV")
@@ -144,11 +144,11 @@ elif page == "Модель обучения":
 
     # 3) Поигрались с RF, LinReg, Catboost и другими моделями
     st.subheader("3. Эксперименты с разными моделями")
-    st.markdown("Результат: {ваш результат здесь}")
+    st.markdown("Результат: 0.14256-14357")
 
     # 4) Затюнили через гридсёрч RF
     st.subheader("4. Тюнинг случайного леса (RandomForest) через GridSearchCV")
-    st.markdown("Результат: {ваш результат здесь}")
+    st.markdown("Результат: 0.14632")
 
     # 5) Запустили стекинг (ЛинРег + Кэтбуст + RF) = 0.1327
     st.subheader("5. Запуск Stacking (LinReg + CatBoost + RandomForest)")
