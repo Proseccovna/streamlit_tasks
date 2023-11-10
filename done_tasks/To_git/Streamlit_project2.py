@@ -22,7 +22,7 @@ if page == "Главная":
     st.subheader('🐱Алиса')
     st.subheader('🐱Тата')
     st.header('Исходный датасет')
-    df = pd.read_csv('./boston.csv')
+    df = pd.read_csv('/done_tasks/To_git/boston.csv')
     nan_columns = df.columns[df.isna().any()]
     nan_counts = df[nan_columns].isna().sum()
     nan_info_df = pd.DataFrame({'Column': nan_columns, 'NaN Count': nan_counts})
@@ -44,7 +44,7 @@ elif page == "Preprocessing и Feature engineering":
         st.markdown("*1. Чистка данных от NaN-значений*")
         st.markdown("*2. Борьба против выбросов: все значения, превышающие 99-й перцентиль заменили на его значение*")
         # Очищаем данные от NaN значений для корректного расчета перцентилей
-        df = pd.read_csv('./boston.csv')
+        df = pd.read_csv('/done_tasks/To_git/boston.csv')
         df_clean = df['LotFrontage'].dropna()
 
 # Рассчитываем 95-й и 99-й перцентили для 'LotFrontage'
